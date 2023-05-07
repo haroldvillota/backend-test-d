@@ -11,6 +11,10 @@ app.set('models', sequelize.models)
 const { SwaggerDocs } = require("./docs/swagger");
 SwaggerDocs(app, 3001);
 
+
+const contractRoutes = require("./routes/contractRoutes");
+app.use("/api/contracts", getProfile, contractRoutes);
+
 /**
  * FIX ME!
  * @returns contract by id

@@ -7,7 +7,7 @@ const options = {
     info: { title: "DEEL BACKEND TASK", version: "1.0.0" },
   },
   apis: [  
-    
+    './src/routes/contractRoutes.js',
   ],
 };
 
