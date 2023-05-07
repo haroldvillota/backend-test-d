@@ -28,7 +28,31 @@ const service = {
 			}
 		);
 		
+	},
 
+	/*
+	*  Get all non terminated contracts with contractor or client equals to profileId
+	*  @return Promise
+	*/
+
+	getAllContracts : function (profileId) {
+
+		return Contract.findAll(
+			{ 
+				where: { 
+					status: { [Op.ne]: 'terminated' },
+					[Op.or]: [
+				        {
+				          ClientId: profileId,
+				        },
+				        {
+				          ContractorId: profileId,
+				        },
+				    ],
+				}
+			}
+		);
+		
 	}
 
 }

@@ -4,7 +4,7 @@ const app = require ('../src/app');
 const routes = require('../src/routes/contractRoutes');
 const { Contract, Job, Profile, sequelize } = require('../src/models');
 
-describe('Test contract API', () => {
+describe('Test get contract by id API', () => {
 
 	beforeAll(async () => {
 
@@ -50,7 +50,7 @@ describe('Test contract API', () => {
 			expect(response.body.status).toBe('FAILED');
 
 		});
-		
+
 		it('request contract with right profile id ', async () => {
 			response = await request(app)
 				.get('/api/contracts/1')

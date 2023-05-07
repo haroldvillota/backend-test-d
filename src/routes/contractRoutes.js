@@ -6,6 +6,59 @@ const contractController = require('../controllers/contractController');
 
 /**
  * @openapi
+ * /api/contracts:
+ *   get:
+ *     summary: Get all contracts
+ *     description: Returns a list of all non terminated contracts belonging to a user (client or contractor)
+ *     tags:
+ *       - Contracts
+ *     parameters:
+ *       - in: header
+ *         name: profile_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The id of the user
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items: 
+ *                     type: object
+ *                   
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status: 
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string 
+ *                       example: "Some error message"             
+ */
+
+
+router.get('/', (req, res) => contractController.getAllContracts(req, res));
+
+
+/**
+ * @openapi
  * /api/contracts/{id}:
  *   get:
  *     summary: Get a contract by id
@@ -42,9 +95,6 @@ const contractController = require('../controllers/contractController');
  *                      id:
  *                        type: integer
  *                        description: The contract ID.
- *                      username:
- *                        type: string
- *                        description: The user name.
  *
  *                   
  *       5XX:
@@ -67,6 +117,8 @@ const contractController = require('../controllers/contractController');
 
 
 router.get('/:id', (req, res) => contractController.getContractById(req, res));
+
+
 
 module.exports = router;
 

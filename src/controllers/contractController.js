@@ -34,3 +34,35 @@ exports.getContractById = function(req, res) {
 	}
 
 };
+
+
+exports.getAllContracts = function(req, res) {
+
+	try{
+
+		const profileId = req.profile.id;
+
+		ContractService.getAllContracts(profileId)
+		.then(contracts =>{
+
+			if(contracts){
+	         	res.json({ status: 'OK', data:contracts });
+	        }else{
+	         	res.status(404).send({ status: "FAILED", error: `Contracts not found` });
+	        }
+			
+		})
+		.catch(error=>{
+
+			LogService.error(error, req);
+        	res.status(500).send({ status: "FAILED", error: error.message ? error.message : error });
+
+		})
+
+	}catch(error){
+
+		LogService.error(error, req);
+      	res.status(500).send({ status: "FAILED", error: error.message ? error.message : error });
+	}
+
+};
