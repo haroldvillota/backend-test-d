@@ -8,6 +8,7 @@ const options = {
   },
   apis: [  
     './src/routes/contractRoutes.js',
+    './src/routes/jobRoutes.js',
   ],
 };
 
