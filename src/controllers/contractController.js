@@ -8,13 +8,15 @@ exports.getContractById = function(req, res) {
 
 		const id = req.params.id;
 
-		ContractService.getContractById(id)
+		const profileId = req.profile.id;
+
+		ContractService.getContractById(id, profileId)
 		.then(contract =>{
 
 			if(contract){
-	          res.json({ status: 'OK', data:contract });
+	         	res.json({ status: 'OK', data:contract });
 	        }else{
-	          res.status(404).send({ status: "FAILED", error: `No contracts with the id ${id}` });
+	         	res.status(404).send({ status: "FAILED", error: `Contract not found` });
 	        }
 			
 		})
