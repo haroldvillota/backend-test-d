@@ -96,3 +96,25 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, zip your repo (make sure to include .git folder) and send us the zip.
 
 Thank you and good luck! 🙏
+
+# Harold Notes
+
+## concurrently
+
+The command start run seed, test and dev concurrently 
+
+## Deploy
+
+In the root folder run:
+
+```bash
+docker compose up
+```
+
+## Things to improve
+
+- Better documentation
+- More and better tests
+- Error management
+
+
