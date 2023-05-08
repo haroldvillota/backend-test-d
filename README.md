@@ -99,6 +99,10 @@ Thank you and good luck! 🙏
 
 # Harold Notes
 
+## API Documentation
+
+It can be found in: http://localhost:3001/api/docs/
+
 ## concurrently
 
 The command start run seed, test and dev concurrently 
