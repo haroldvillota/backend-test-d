@@ -10,6 +10,7 @@ const options = {
     './src/routes/contractRoutes.js',
     './src/routes/jobRoutes.js',
     './src/routes/balancesRoutes.js',
+    './src/routes/adminRoutes.js',
   ],
 };
 
