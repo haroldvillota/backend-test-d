@@ -14,9 +14,11 @@ SwaggerDocs(app, 3001);
 
 const contractRoutes = require("./routes/contractRoutes");
 const jobRoutes = require("./routes/jobRoutes");
+const balancesRoutes = require("./routes/balancesRoutes");
 
 app.use("/api/contracts", getProfile, contractRoutes);
 app.use("/api/jobs", getProfile, jobRoutes);
+app.use("/api/balances", getProfile, balancesRoutes);
 
 /**
  * FIX ME!
