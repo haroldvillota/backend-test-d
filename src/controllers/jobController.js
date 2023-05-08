@@ -33,3 +33,31 @@ exports.getAllUnpaidJobs = function(req, res) {
 	}
 
 };
+
+exports.payForAJob = function(req, res) {
+
+	try{
+
+		const jobId = req.params.job_id;
+
+		const profileId = req.profile.id;
+
+		JobService.payForAJob(jobId, profileId)
+		.then(result =>{
+
+	        res.json({ status: 'OK', data:result });
+		})
+		.catch(error=>{
+
+			LogService.error(error, req);
+        	res.status(500).send({ status: "FAILED", error: error.message ? error.message : error });
+
+		})
+
+	}catch(error){
+
+		LogService.error(error, req);
+      	res.status(500).send({ status: "FAILED", error: error.message ? error.message : error });
+	}
+
+};

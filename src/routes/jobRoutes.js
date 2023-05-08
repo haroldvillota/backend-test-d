@@ -57,6 +57,49 @@ const jobController = require('../controllers/jobController');
 router.get('/unpaid', (req, res) => jobController.getAllUnpaidJobs(req, res));
 
 
+/**
+ * @openapi
+ * /api/jobs/{job_id}/pay:
+ *   post:
+ *     summary: Pay for a job
+ *     description: Pay for a job specified by the id if the client have enough balance
+ *     tags:
+ *       - Jobs
+ *     parameters:
+ *       - in: header
+ *         name: profile_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The id of the user
+ *       - in: path
+ *         name: job_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The id of the job to pay
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                      id:
+ *                        type: integer
+ *                        description: The job ID.
+ */
+
+router.post('/:job_id/pay', (req, res) => jobController.payForAJob(req, res));
+
+
 
 module.exports = router;
 
