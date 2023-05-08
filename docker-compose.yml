@@ -1,0 +1,12 @@
+version: '3'
+services:
+
+  deel-backend-task:
+    build: '.'
+    volumes:  
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+      - ./test:/app/test
+    ports:
+      - '3001:3001'
+    command: ["npm","start"]
