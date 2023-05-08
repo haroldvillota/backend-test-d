@@ -53,6 +53,63 @@ const service = {
 		
 	},
 
+
+	/*
+	*  
+	*  @return Promise
+	*/
+
+	getBestClients : function (start, end, limit = 2) {
+
+		return new Promise((resolve, reject) => {
+			Job.findAll(
+				{ 
+					attributes: [
+						[sequelize.fn('SUM', sequelize.col('price')), 'paid'],
+					],
+					include: { 
+						model: Contract,
+						attributes: ['id'],
+						include: {
+							model: Profile,
+							as: 'Client',
+							attributes: ['id','firstName','lastName'],
+						}
+						
+					},
+					where: { 
+						paid: true,
+						paymentDate: { [Op.between]: [start, end] },
+					},
+					group: 'Contract.Client.id',
+					order: [['paid', 'DESC']],
+					limit: limit
+				}
+			)
+			.then(result => {
+				if(result && result.length>0){
+
+					let bestsClientsFormatted = result.map( element =>{
+						return {
+							id: element.Contract.Client.id,
+							fullName: element.Contract.Client.firstName + ' ' + element.Contract.Client.lastName,
+							paid: element.paid
+						}
+					})
+					resolve(bestsClientsFormatted);	
+
+				}else{
+					reject(result);
+				}
+				
+			})
+			.catch(error => {
+				reject(error);
+			})
+		})
+		
+	},
+
 }
 
 
